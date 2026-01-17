@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local LLM Translator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>翻訳</h1>
+
+    <div class="status" id="status">
+      <span id="status-text">準備完了</span>
+    </div>
+
+    <div class="endpoint-info" id="endpoint-info">
+      <label>使用エンドポイント:</label>
+      <span id="endpoint-name">-</span>
+    </div>
+
+    <div class="progress-container" id="progress-container" hidden>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-text" id="progress-text">0 / 0</div>
+    </div>
+
+    <div class="actions">
+      <button id="translate-btn" class="btn primary">このページを翻訳</button>
+      <button id="options-btn" class="btn secondary">設定</button>
+    </div>
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

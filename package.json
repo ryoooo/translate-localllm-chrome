@@ -1,0 +1,19 @@
+{
+	"name": "translate-localllm-chrome",
+	"version": "0.1.0",
+	"type": "module",
+	"scripts": {
+		"build": "bun run build.ts",
+		"dev": "bun run build.ts --watch",
+		"lint": "biome check .",
+		"format": "biome format --write .",
+		"typecheck": "tsc --noEmit",
+		"test": "bun test"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.0",
+		"@types/bun": "latest",
+		"@types/chrome": "^0.0.287",
+		"typescript": "^5.7.0"
+	}
+}

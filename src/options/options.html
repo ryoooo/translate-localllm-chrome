@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local LLM Translator - 設定</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Local LLM Translator 設定</h1>
+    </header>
+
+    <main>
+      <section class="endpoints-section">
+        <div class="section-header">
+          <h2>エンドポイント</h2>
+          <button id="add-endpoint-btn" class="btn primary">+ 追加</button>
+        </div>
+
+        <div id="endpoints-list" class="endpoints-list">
+        </div>
+      </section>
+
+      <div id="endpoint-form" class="endpoint-form" hidden>
+        <h3 id="form-title">エンドポイント追加</h3>
+
+        <div class="form-group">
+          <label for="endpoint-name">名前</label>
+          <input type="text" id="endpoint-name" placeholder="TranslateGemma">
+        </div>
+
+        <div class="form-group">
+          <label for="endpoint-url">URL</label>
+          <input type="url" id="endpoint-url" placeholder="http://localhost:1234/v1/completions">
+        </div>
+
+        <div class="form-group">
+          <label for="endpoint-api-type">API種類</label>
+          <select id="endpoint-api-type">
+            <option value="translategemma">TranslateGemma（推奨: TranslateGemma専用形式）</option>
+            <option value="chat">Chat Completions（一般的なモデル用）</option>
+            <option value="completions">Completions（レガシー）</option>
+          </select>
+          <div class="help-text">
+            TranslateGemmaはCompletions APIを使用（拡張機能側でプロンプトを生成）
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="endpoint-model">モデル名</label>
+          <input type="text" id="endpoint-model" placeholder="translategemma-12b-it">
+        </div>
+
+        <div class="form-group">
+          <label for="endpoint-template">プロンプトテンプレート</label>
+          <textarea id="endpoint-template" rows="6" placeholder="Translate the following English text to Japanese. Output only the translation, nothing else.
+
+{{text}}"></textarea>
+          <div class="help-text">
+            利用可能な変数: <code>{{text}}</code>, <code>{{sourceLang}}</code>, <code>{{targetLang}}</code>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button id="save-endpoint-btn" class="btn primary">保存</button>
+          <button id="cancel-endpoint-btn" class="btn secondary">キャンセル</button>
+        </div>
+      </div>
+
+      <section class="presets-section">
+        <h2>プリセットテンプレート</h2>
+        <div class="presets-list">
+          <button class="preset-btn" data-preset="translategemma">TranslateGemma</button>
+          <button class="preset-btn" data-preset="plamo">PLaMo-2-Translate</button>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" hidden></div>
+  </div>
+
+  <script src="options.js" type="module"></script>
+</body>
+</html>

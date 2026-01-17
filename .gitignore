@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Development environment (local only)
+.devcontainer/
+.claude/
+agentpack.yml
+CLAUDE.md
+AGENTS.md
+codex.config.toml
+docs/
+
+# Environment files
+.env
+.env.*
+
+# Local settings
+*.local.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp

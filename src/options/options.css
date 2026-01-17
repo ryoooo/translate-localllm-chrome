@@ -1,0 +1,253 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	background: #f5f5f5;
+	min-height: 100vh;
+}
+
+.container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 24px;
+}
+
+header {
+	margin-bottom: 32px;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: 600;
+	color: #333;
+}
+
+h2 {
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+	margin-bottom: 16px;
+}
+
+h3 {
+	font-size: 16px;
+	font-weight: 600;
+	color: #333;
+	margin-bottom: 16px;
+}
+
+.section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.endpoints-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+
+.endpoint-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 16px;
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.endpoint-item.active {
+	border-left: 4px solid #4caf50;
+}
+
+.endpoint-item input[type="radio"] {
+	flex-shrink: 0;
+}
+
+.endpoint-info {
+	flex: 1;
+}
+
+.endpoint-info .name {
+	font-weight: 500;
+	color: #333;
+}
+
+.endpoint-info .url {
+	font-size: 12px;
+	color: #666;
+	margin-top: 4px;
+}
+
+.endpoint-actions {
+	display: flex;
+	gap: 8px;
+}
+
+.endpoint-form {
+	background: white;
+	padding: 24px;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	margin-bottom: 24px;
+}
+
+.form-group {
+	margin-bottom: 16px;
+}
+
+.form-group label {
+	display: block;
+	font-weight: 500;
+	margin-bottom: 6px;
+	color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+	width: 100%;
+	padding: 10px 12px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	font-size: 14px;
+	font-family: inherit;
+}
+
+.form-group textarea {
+	resize: vertical;
+	font-family: monospace;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+	outline: none;
+	border-color: #1976d2;
+	box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+.help-text {
+	font-size: 12px;
+	color: #666;
+	margin-top: 6px;
+}
+
+.help-text code {
+	background: #f5f5f5;
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-family: monospace;
+}
+
+.form-actions {
+	display: flex;
+	gap: 12px;
+	margin-top: 24px;
+}
+
+.btn {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.btn.primary {
+	background: #1976d2;
+	color: white;
+}
+
+.btn.primary:hover {
+	background: #1565c0;
+}
+
+.btn.secondary {
+	background: #e0e0e0;
+	color: #333;
+}
+
+.btn.secondary:hover {
+	background: #d0d0d0;
+}
+
+.btn.danger {
+	background: #f44336;
+	color: white;
+}
+
+.btn.danger:hover {
+	background: #d32f2f;
+}
+
+.btn.small {
+	padding: 6px 12px;
+	font-size: 12px;
+}
+
+.presets-section {
+	background: white;
+	padding: 24px;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.presets-list {
+	display: flex;
+	gap: 12px;
+}
+
+.preset-btn {
+	padding: 8px 16px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	background: white;
+	font-size: 13px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.preset-btn:hover {
+	border-color: #1976d2;
+	color: #1976d2;
+}
+
+.toast {
+	position: fixed;
+	bottom: 24px;
+	right: 24px;
+	padding: 12px 24px;
+	background: #333;
+	color: white;
+	border-radius: 6px;
+	font-size: 14px;
+	animation: slideIn 0.3s ease;
+}
+
+.toast.success {
+	background: #4caf50;
+}
+
+.toast.error {
+	background: #f44336;
+}
+
+@keyframes slideIn {
+	from {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
