@@ -53,6 +53,16 @@ function injectStyles(): void {
 	document.head.appendChild(style);
 }
 
+// 要素がテキストノードのみを含むかチェック（子要素を含まない）
+function hasOnlyTextContent(element: HTMLElement): boolean {
+	for (const child of element.childNodes) {
+		if (child.nodeType === Node.ELEMENT_NODE) {
+			return false;
+		}
+	}
+	return true;
+}
+
 // テキストを抽出する要素を取得
 function getTranslatableElements(): HTMLElement[] {
 	const elements = document.querySelectorAll<HTMLElement>(TRANSLATABLE_SELECTORS);
@@ -63,6 +73,11 @@ function getTranslatableElements(): HTMLElement[] {
 	for (const el of elements) {
 		// Skip elements inside excluded containers
 		if (el.closest(excludedSelector)) {
+			continue;
+		}
+
+		// Skip elements that contain child elements (to preserve links, etc.)
+		if (!hasOnlyTextContent(el)) {
 			continue;
 		}
 
