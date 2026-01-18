@@ -1,6 +1,10 @@
 # Local LLM Translator
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 LM Studioで動作するローカルLLMを使用して、英語ウェブページを日本語に翻訳するChrome拡張機能。
+
+> **GitHub**: https://github.com/ryoooo/translate-localllm-chrome
 
 ## 特徴
 
@@ -89,22 +93,25 @@ bun run format
 ```
 src/
 ├── lib/
-│   ├── types.ts           # 共有型定義
-│   ├── storage.ts         # Chrome Storage操作
-│   ├── prompt-builder.ts  # プロンプト生成
-│   └── api-client.ts      # LM Studio API呼び出し
+│   ├── types.ts              # 共有型定義
+│   ├── storage.ts            # Chrome Storage操作
+│   ├── storage.test.ts       # storageのテスト
+│   ├── prompt-builder.ts     # プロンプト生成
+│   ├── prompt-builder.test.ts
+│   ├── api-client.ts         # LM Studio API呼び出し
+│   └── api-client.test.ts
 ├── background/
-│   └── service-worker.ts  # バックグラウンド処理
+│   └── service-worker.ts     # バックグラウンド処理
 ├── content/
-│   └── content-script.ts  # DOM操作・テキスト抽出
+│   └── content-script.ts     # DOM操作・テキスト抽出
 ├── popup/
 │   ├── popup.html
 │   ├── popup.css
-│   └── popup.ts           # ポップアップUI
+│   └── popup.ts              # ポップアップUI
 └── options/
     ├── options.html
     ├── options.css
-    └── options.ts          # 設定UI
+    └── options.ts            # 設定UI
 ```
 
 ## プロンプトテンプレート
