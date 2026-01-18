@@ -40,8 +40,8 @@ describe("storage", () => {
 	describe("getSettings", () => {
 		it("should return default settings when storage is empty", async () => {
 			const settings = await getSettings();
-			expect(settings.endpoints).toHaveLength(1);
-			expect(settings.endpoints[0].name).toBe("TranslateGemma (Default)");
+			expect(settings.endpoints).toHaveLength(2);
+			expect(settings.endpoints[0].name).toBe("TranslateGemma");
 		});
 
 		it("should return saved settings", async () => {

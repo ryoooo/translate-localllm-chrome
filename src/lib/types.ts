@@ -53,12 +53,21 @@ export const DEFAULT_SETTINGS: Settings = {
 	endpoints: [
 		{
 			id: "default-translategemma",
-			name: "TranslateGemma (Default)",
+			name: "TranslateGemma",
 			url: "http://localhost:1234/v1/completions",
 			model: "translategemma-12b-it",
 			promptTemplate: "{{text}}",
 			apiType: "translategemma",
 			isDefault: true,
+		},
+		{
+			id: "default-plamo",
+			name: "PLaMo-2-Translate",
+			url: "http://localhost:1234/v1/completions",
+			model: "plamo-2-translate",
+			promptTemplate: "{{text}}",
+			apiType: "plamo",
+			isDefault: false,
 		},
 	],
 	activeEndpointId: "default-translategemma",
