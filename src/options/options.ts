@@ -1,14 +1,5 @@
+import { PROMPT_PRESETS } from "../lib/prompt-builder";
 import type { ApiType, Endpoint, Settings } from "../lib/types";
-
-// プリセットテンプレート
-const PRESETS: Record<string, string> = {
-	translategemma: "{{text}}",
-	plamo: `<|plamo:op|>dataset
-translation
-<|plamo:op|>input lang={{sourceLang}}
-{{text}}
-<|plamo:op|>output lang={{targetLang}}`,
-};
 
 // DOM要素
 const endpointsList = document.getElementById("endpoints-list") as HTMLDivElement;
@@ -181,7 +172,7 @@ async function saveSettings(): Promise<void> {
 
 // プリセットを適用
 function applyPreset(presetName: string): void {
-	const template = PRESETS[presetName];
+	const template = PROMPT_PRESETS[presetName];
 	if (template) {
 		templateInput.value = template;
 	}

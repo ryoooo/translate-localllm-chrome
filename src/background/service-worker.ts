@@ -1,7 +1,7 @@
 import { translateText } from "../lib/api-client";
 import { buildPrompt } from "../lib/prompt-builder";
 import { getActiveEndpoint, getSettings, saveSettings } from "../lib/storage";
-import type { MessageType, Settings, TranslateRequest, TranslateResponse } from "../lib/types";
+import type { MessageType, TranslateRequest, TranslateResponse } from "../lib/types";
 
 // コンテキストメニューを登録
 chrome.runtime.onInstalled.addListener(() => {
