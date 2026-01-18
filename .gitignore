@@ -37,3 +37,6 @@ npm-debug.log*
 # Temporary files
 *.tmp
 *.temp
+
+# Store assets (local only)
+*.zip

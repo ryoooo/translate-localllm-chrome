@@ -48,9 +48,15 @@ async function handleMessage(message: MessageType): Promise<unknown> {
 
 async function startTranslation(tabId: number): Promise<void> {
 	try {
+		// 動的にcontent scriptを注入
+		await chrome.scripting.executeScript({
+			target: { tabId },
+			files: ["content-script.js"],
+		});
+		// 注入後に翻訳開始メッセージを送信
 		await chrome.tabs.sendMessage(tabId, { type: "START_EXTRACTION" });
 	} catch (error) {
-		console.error("Failed to send message to content script:", error);
+		console.error("Failed to inject content script:", error);
 	}
 }
 

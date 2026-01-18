@@ -1,0 +1,23 @@
+Translate web pages using your local LLM running on LM Studio.
+
+Features:
+- Translate entire pages paragraph by paragraph
+- Replace original text with Japanese translation inline
+- Support multiple LLM endpoints with custom prompt templates
+- Works with TranslateGemma, PLaMo-2-Translate, and other models
+- Launch from toolbar icon or right-click context menu
+
+Requirements:
+- LM Studio (or compatible API server) running locally
+- Translation model (e.g., TranslateGemma-12B-IT, PLaMo-2-Translate)
+
+Privacy:
+- All translations are processed locally on your machine
+- No data is sent to external servers
+- Only connects to localhost (127.0.0.1 or localhost)
+
+Setup:
+1. Install and run LM Studio with a translation model
+2. Click the extension icon and go to Options
+3. Add your endpoint (default: http://localhost:1234/v1/completions)
+4. Visit any English page and click "Translate this page"

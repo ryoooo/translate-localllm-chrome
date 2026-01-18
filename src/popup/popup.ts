@@ -46,9 +46,30 @@ function updateProgress(progress: TranslationProgress): void {
 	}
 }
 
+// localhost権限を確認・要求
+async function ensureHostPermissions(): Promise<boolean> {
+	const permissions = {
+		origins: ["http://localhost:*/*", "http://127.0.0.1:*/*"],
+	};
+
+	const hasPermission = await chrome.permissions.contains(permissions);
+	if (hasPermission) return true;
+
+	return chrome.permissions.request(permissions);
+}
+
 // 翻訳開始
 translateBtn.addEventListener("click", async () => {
 	translateBtn.disabled = true;
+
+	// localhost権限を確認・要求
+	const hasPermission = await ensureHostPermissions();
+	if (!hasPermission) {
+		setStatus("localhost権限が必要です", "error");
+		translateBtn.disabled = false;
+		return;
+	}
+
 	setStatus("翻訳中...", "translating");
 	progressContainer.hidden = false;
 	progressFill.style.width = "0%";
