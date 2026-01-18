@@ -39,12 +39,13 @@
         <div class="form-group">
           <label for="endpoint-api-type">API種類</label>
           <select id="endpoint-api-type">
-            <option value="translategemma">TranslateGemma（推奨: TranslateGemma専用形式）</option>
+            <option value="translategemma">TranslateGemma</option>
+            <option value="plamo">PLaMo-2-Translate</option>
             <option value="chat">Chat Completions（一般的なモデル用）</option>
-            <option value="completions">Completions（レガシー）</option>
+            <option value="completions">Completions（カスタムプロンプト）</option>
           </select>
           <div class="help-text">
-            TranslateGemmaはCompletions APIを使用（拡張機能側でプロンプトを生成）
+            専用モデルはプロンプトを自動生成。カスタムプロンプトを使う場合はCompletionsを選択
           </div>
         </div>
 

@@ -120,6 +120,56 @@ describe("translateText", () => {
 		});
 	});
 
+	describe("plamo API", () => {
+		beforeEach(() => {
+			globalThis.fetch = mock(
+				() =>
+					Promise.resolve({
+						ok: true,
+						json: () =>
+							Promise.resolve({
+								choices: [{ text: "こんにちは世界" }],
+							}),
+					} as Response),
+				// biome-ignore lint/suspicious/noExplicitAny: Mock fetch for testing
+			) as any;
+		});
+
+		it("should return translated text on success", async () => {
+			const config: ApiClientConfig = {
+				url: "http://localhost:1234/v1/completions",
+				model: "plamo-2-translate",
+				apiType: "plamo",
+			};
+
+			const result = await translateText("Hello world", config);
+
+			expect(result.success).toBe(true);
+			expect(result.translatedText).toBe("こんにちは世界");
+		});
+
+		it("should call API with PLaMo prompt format", async () => {
+			const config: ApiClientConfig = {
+				url: "http://localhost:1234/v1/completions",
+				model: "plamo-2-translate",
+				apiType: "plamo",
+				sourceLang: "en",
+				targetLang: "ja",
+			};
+
+			await translateText("Test text", config);
+
+			const call = (fetch as unknown as ReturnType<typeof mock>).mock.calls[0];
+			const body = JSON.parse(call[1].body as string);
+			expect(body.prompt).toBeDefined();
+			expect(body.prompt).toContain("<|plamo:op|>dataset");
+			expect(body.prompt).toContain("lang=en");
+			expect(body.prompt).toContain("lang=ja");
+			expect(body.prompt).toContain("Test text");
+			expect(body.messages).toBeUndefined();
+		});
+	});
+
 	describe("completions API", () => {
 		beforeEach(() => {
 			globalThis.fetch = mock(

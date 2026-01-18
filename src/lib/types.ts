@@ -1,5 +1,5 @@
-// API種類（Chat Completions vs Completions vs TranslateGemma）
-export type ApiType = "chat" | "completions" | "translategemma";
+// API種類
+export type ApiType = "chat" | "completions" | "translategemma" | "plamo";
 
 // エンドポイント設定
 export interface Endpoint {

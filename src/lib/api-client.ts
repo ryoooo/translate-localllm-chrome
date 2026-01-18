@@ -56,6 +56,16 @@ ${text.trim()}<end_of_turn>
 `;
 }
 
+// PLaMo-2-Translate用のプロンプトを生成
+function buildPlamoPrompt(text: string, sourceLang: string, targetLang: string): string {
+	return `<|plamo:op|>dataset
+translation
+<|plamo:op|>input lang=${sourceLang}
+${text.trim()}
+<|plamo:op|>output lang=${targetLang}
+`;
+}
+
 export async function translateText(
 	prompt: string,
 	config: ApiClientConfig,
@@ -73,6 +83,15 @@ export async function translateText(
 			body = {
 				model,
 				prompt: translateGemmaPrompt,
+				temperature: 0.1,
+				max_tokens: 4096,
+			};
+		} else if (apiType === "plamo") {
+			// PLaMo-2-Translate専用形式（Completions APIで直接プロンプトを生成）
+			const plamoPrompt = buildPlamoPrompt(prompt, sourceLang, targetLang);
+			body = {
+				model,
+				prompt: plamoPrompt,
 				temperature: 0.1,
 				max_tokens: 4096,
 			};
