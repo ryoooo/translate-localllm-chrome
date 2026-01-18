@@ -53,16 +53,6 @@ function injectStyles(): void {
 	document.head.appendChild(style);
 }
 
-// 要素がテキストノードのみを含むかチェック（子要素を含まない）
-function hasOnlyTextContent(element: HTMLElement): boolean {
-	for (const child of element.childNodes) {
-		if (child.nodeType === Node.ELEMENT_NODE) {
-			return false;
-		}
-	}
-	return true;
-}
-
 // テキストを抽出する要素を取得
 function getTranslatableElements(): HTMLElement[] {
 	const elements = document.querySelectorAll<HTMLElement>(TRANSLATABLE_SELECTORS);
@@ -76,16 +66,18 @@ function getTranslatableElements(): HTMLElement[] {
 			continue;
 		}
 
-		// Skip elements that contain child elements (to preserve links, etc.)
-		if (!hasOnlyTextContent(el)) {
-			continue;
-		}
-
 		const text = el.textContent?.trim() ?? "";
 		if (text.length >= MIN_TEXT_LENGTH && /[a-zA-Z]/.test(text)) {
 			result.push(el);
 		}
 	}
+
+	// 深い要素から先に処理（子→親の順）
+	result.sort((a, b) => {
+		if (a.contains(b)) return 1; // aがbの親なら後
+		if (b.contains(a)) return -1; // bがaの親なら後
+		return 0;
+	});
 
 	return result;
 }
@@ -99,13 +91,39 @@ async function translateElement(element: HTMLElement): Promise<void> {
 	element.dataset.originalText = originalText;
 
 	try {
+		// 子要素を抽出してプレースホルダー化
+		const childElements: Element[] = [];
+		const parts: string[] = [];
+
+		for (const node of element.childNodes) {
+			if (node.nodeType === Node.TEXT_NODE) {
+				parts.push(node.textContent || "");
+			} else if (node.nodeType === Node.ELEMENT_NODE) {
+				parts.push(`{{${childElements.length}}}`);
+				childElements.push(node as Element);
+			}
+		}
+
+		const textWithPlaceholders = parts.join("");
+
+		// 翻訳を実行
 		const response = (await chrome.runtime.sendMessage({
 			type: "TRANSLATE_TEXT",
-			request: { text: originalText },
+			request: { text: textWithPlaceholders },
 		})) as TranslateResponse;
 
 		if (response.success && response.translatedText) {
-			element.textContent = response.translatedText;
+			if (childElements.length === 0) {
+				// 子要素がない場合は単純に置換
+				element.textContent = response.translatedText;
+			} else {
+				// プレースホルダーを元の要素で復元
+				let result = response.translatedText;
+				childElements.forEach((el, index) => {
+					result = result.replace(`{{${index}}}`, el.outerHTML);
+				});
+				element.innerHTML = result;
+			}
 			element.classList.add(TRANSLATED_CLASS);
 		} else {
 			console.warn("Translation failed:", response.error);

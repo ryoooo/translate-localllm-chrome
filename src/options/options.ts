@@ -2,7 +2,7 @@ import type { ApiType, Endpoint, Settings } from "../lib/types";
 
 // プリセットテンプレート
 const PRESETS: Record<string, string> = {
-	translategemma: `{{text}}`,
+	translategemma: "{{text}}",
 	plamo: `<|plamo:op|>dataset
 translation
 <|plamo:op|>input lang={{sourceLang}}
